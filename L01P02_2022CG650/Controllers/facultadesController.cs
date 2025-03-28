@@ -9,22 +9,22 @@ using L01P02_2022CG650.Models;
 
 namespace L01P02_2022CG650.Controllers
 {
-    public class FacultadModelsController : Controller
+    public class facultadesController : Controller
     {
         private readonly NotasContext _context;
 
-        public FacultadModelsController(NotasContext context)
+        public facultadesController(NotasContext context)
         {
             _context = context;
         }
 
-        // GET: FacultadModels
+        // GET: facultades
         public async Task<IActionResult> Index()
         {
-            return View(await _context.facultad.ToListAsync());
+            return View(await _context.facultades.ToListAsync());
         }
 
-        // GET: FacultadModels/Details/5
+        // GET: facultades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace L01P02_2022CG650.Controllers
                 return NotFound();
             }
 
-            var facultadModel = await _context.facultad
+            var facultades = await _context.facultades
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (facultadModel == null)
+            if (facultades == null)
             {
                 return NotFound();
             }
 
-            return View(facultadModel);
+            return View(facultades);
         }
 
-        // GET: FacultadModels/Create
+        // GET: facultades/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: FacultadModels/Create
+        // POST: facultades/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,facultad")] FacultadModel facultadModel)
+        public async Task<IActionResult> Create([Bind("id,facultad")] facultades facultades)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(facultadModel);
+                _context.Add(facultades);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(facultadModel);
+            return View(facultades);
         }
 
-        // GET: FacultadModels/Edit/5
+        // GET: facultades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace L01P02_2022CG650.Controllers
                 return NotFound();
             }
 
-            var facultadModel = await _context.facultad.FindAsync(id);
-            if (facultadModel == null)
+            var facultades = await _context.facultades.FindAsync(id);
+            if (facultades == null)
             {
                 return NotFound();
             }
-            return View(facultadModel);
+            return View(facultades);
         }
 
-        // POST: FacultadModels/Edit/5
+        // POST: facultades/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,facultad")] FacultadModel facultadModel)
+        public async Task<IActionResult> Edit(int id, [Bind("id,facultad")] facultades facultades)
         {
-            if (id != facultadModel.id)
+            if (id != facultades.id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace L01P02_2022CG650.Controllers
             {
                 try
                 {
-                    _context.Update(facultadModel);
+                    _context.Update(facultades);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FacultadModelExists(facultadModel.id))
+                    if (!facultadesExists(facultades.id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace L01P02_2022CG650.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(facultadModel);
+            return View(facultades);
         }
 
-        // GET: FacultadModels/Delete/5
+        // GET: facultades/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +123,34 @@ namespace L01P02_2022CG650.Controllers
                 return NotFound();
             }
 
-            var facultadModel = await _context.facultad
+            var facultades = await _context.facultades
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (facultadModel == null)
+            if (facultades == null)
             {
                 return NotFound();
             }
 
-            return View(facultadModel);
+            return View(facultades);
         }
 
-        // POST: FacultadModels/Delete/5
+        // POST: facultades/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var facultadModel = await _context.facultad.FindAsync(id);
-            if (facultadModel != null)
+            var facultades = await _context.facultades.FindAsync(id);
+            if (facultades != null)
             {
-                _context.facultad.Remove(facultadModel);
+                _context.facultades.Remove(facultades);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FacultadModelExists(int id)
+        private bool facultadesExists(int id)
         {
-            return _context.facultad.Any(e => e.id == id);
+            return _context.facultades.Any(e => e.id == id);
         }
     }
 }

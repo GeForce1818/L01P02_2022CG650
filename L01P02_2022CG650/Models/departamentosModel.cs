@@ -5,6 +5,8 @@ namespace L01P02_2022CG650.Models
     {
         [Key]
         public int id { get; set; }
-        public string departamento { get; set; }
+        [Display(Name = "Departamento")]
+        [Required(ErrorMessage = "Este campo es obligatiorio")]
+        public string? departamento { get; set; }
     }
 }
