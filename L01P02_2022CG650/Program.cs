@@ -1,7 +1,14 @@
+using L01P02_2022CG650.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<NotasContext>(options =>
+    options.UseSqlServer(
+             builder.Configuration.GetConnectionString("NotasDbConnection")));
 
 var app = builder.Build();
 
